@@ -1,8 +1,11 @@
+"use client";
+
+import { toast } from "sonner";
 import { Button } from "@base-ui/react";
 import { Sparkles } from "lucide-react";
 import { useCreateHabitStore } from "../model/createHabitStore";
-import { createHabitSevice } from "../service/createHabitService";
-import { toast } from "sonner";
+
+import { createHabitApi } from "entities/habbit";
 
 export const HabitCreateBtn = () => {
       const {
@@ -33,7 +36,7 @@ export const HabitCreateBtn = () => {
         }
 
         try {
-          await createHabitSevice(data)
+          await createHabitApi(data)
         } catch (error) {
             toast.error("Failed to create habit", {
               description: "Please check your connection and try again.",

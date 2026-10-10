@@ -1,3 +1,5 @@
+"use client";
+
 import { Input } from "@base-ui/react"
 import { CalendarDays } from "lucide-react"
 import { Label } from "shared/ui"
