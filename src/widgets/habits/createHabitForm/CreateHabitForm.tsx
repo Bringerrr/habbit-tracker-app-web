@@ -4,57 +4,12 @@ import {
   Sparkles,
 } from "lucide-react";
 
-import { Button } from "shared/ui";
-import type { Habit } from "core/habits/types";
-import { HabitBasicFields, HabitFrequencySelector, HabitPrioritySelector, HabitStartDate } from "features/habit/create";
-import { useCreateHabitStore } from "features/habit/create/model/createHabitStore";
+import { HabitBasicFields, HabitCreateBtn, HabitFrequencySelector, HabitPrioritySelector, HabitStartDate } from "features/habit/create";
 
-
-interface CreateHabitFormProps {
-  onSubmit?: (habit: Habit) => void;
-  onCancel?: () => void;
-}
-
-export function CreateHabitForm({
-  onSubmit,
-  onCancel,
-}: CreateHabitFormProps) {
-  const {
-    name,
-    description,
-    priority,
-    frequency,
-    startDate,
-    setError,
-  } = useCreateHabitStore();
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    if (!name.trim()) {
-      setError("Give your habit a name to get started.");
-      return;
-    }
-
-    setError("");
-
-    const data = {
-      name: name.trim(),
-      description: description.trim(),
-      priority,
-      frequency,
-      startDate,
-    }
-
-    onSubmit?.(data);
-
-    console.log('data', data);
-    
-  };
+export function CreateHabitForm() {
 
   return (
     <form
-      onSubmit={handleSubmit}
       className="
         relative w-full max-w-2xl overflow-hidden
         rounded-[28px]
@@ -104,10 +59,9 @@ export function CreateHabitForm({
         <HabitStartDate/>
       </div>
 
-      {/* Footer */}
       <div
         className="
-          flex flex-col-reverse gap-3
+          flex flex-col gap-3
           border-t border-border/60
           bg-muted/20
           px-7 py-5
@@ -120,30 +74,7 @@ export function CreateHabitForm({
         </p>
 
         <div className="flex flex-col-reverse gap-2 sm:flex-row">
-          {onCancel && (
-            <Button
-              type="button"
-              variant="ghost"
-              onClick={onCancel}
-              className="rounded-xl px-5"
-            >
-              Cancel
-            </Button>
-          )}
-
-          <Button
-            type="submit"
-            className="
-              rounded-xl px-6
-              shadow-lg shadow-primary/15
-              transition-all
-              hover:-translate-y-0.5
-              hover:shadow-xl hover:shadow-primary/20
-            "
-          >
-            <Sparkles className="mr-2 h-4 w-4" />
-            Create habit
-          </Button>
+          <HabitCreateBtn />
         </div>
       </div>
     </form>
