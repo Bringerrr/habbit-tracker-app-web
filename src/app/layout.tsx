@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { cn } from "cn";
 import { Geist, Geist_Mono, IBM_Plex_Sans, Manrope } from "next/font/google";
+import { Toaster } from "sonner";
 
 import "./globals.css";
 
@@ -29,7 +30,16 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={cn("h-full", "antialiased", geistSans.variable, geistMono.variable, "font-sans", ibmPlexSans.variable, manropeHeading.variable)}
     >
-      <body className="min-h-full flex flex-col">Layout{children}</body>
+      <body className="min-h-full flex flex-col">
+        Layout
+        {children}
+        <Toaster
+          position="top-right"
+          richColors
+          closeButton
+          duration={4000}
+        />
+      </body>
     </html>
   );
 }

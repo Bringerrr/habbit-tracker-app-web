@@ -1,0 +1,13 @@
+{
+  "habits": [
+    {
+      "name": "Test",
+      "description": "Test",
+      "priority": "low",
+      "frequency": "weekly",
+      "startDate": "2026-10-10",
+      "id": "CwTDHMR1Nwk"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

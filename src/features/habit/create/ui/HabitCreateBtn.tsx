@@ -1,6 +1,8 @@
 import { Button } from "@base-ui/react";
 import { Sparkles } from "lucide-react";
 import { useCreateHabitStore } from "../model/createHabitStore";
+import { createHabitSevice } from "../service/createHabitService";
+import { toast } from "sonner";
 
 export const HabitCreateBtn = () => {
       const {
@@ -12,13 +14,12 @@ export const HabitCreateBtn = () => {
         setError,
       } = useCreateHabitStore();
 
-
-      const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
+      const handleSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
-
+        
         if (!name.trim()) {
-        setError("Give your habit a name to get started.");
-        return;
+          setError("Give your habit a name to get started.");
+          return;
         }
 
         setError("");
@@ -29,9 +30,15 @@ export const HabitCreateBtn = () => {
             priority,
             frequency,
             startDate,
-            }
+        }
 
-        console.log('data', data);
+        try {
+          await createHabitSevice(data)
+        } catch (error) {
+            toast.error("Failed to create habit", {
+              description: "Please check your connection and try again.",
+            });
+        }
         
     };
 
